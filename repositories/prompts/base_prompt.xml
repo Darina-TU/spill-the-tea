@@ -46,10 +46,7 @@
     </rules>
 
     <input>
-        {
-            "interests": {{INTERESTS}},
-            "rated_questions": []
-        }
+        {{INPUT_DATA}}
     </input>
 
     <output_format>
