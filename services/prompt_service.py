@@ -7,12 +7,27 @@ class PromptService:
     def __init__(self, deck_repository):
         self.deck_repository = deck_repository
 
-        self.base_prompt_file = Path("repositories") / "prompts" / "base_prompt.xml"
-        self.prompt_folder = (
-            Path("users")
-            / deck_repository.username
-            / "prompts"
+        # self.base_prompt_file = Path("repositories") / "prompts" / "base_prompt.xml"
+        # self.prompt_folder = (
+        #     Path("users")
+        #     / deck_repository.username
+        #     / "prompts"
+        # )
+        #         self.prompt_folder.mkdir(parents=True, exist_ok=True)
+        project_root = Path(__file__).parent.parent
+
+        self.base_prompt_file = (
+                project_root
+                / "repositories"
+                / "prompts"
+                / "base_prompt.xml"
         )
+
+        self.prompt_folder = (
+                self.deck_repository.deck_folder
+                / "prompts"
+        )
+
         self.prompt_folder.mkdir(parents=True, exist_ok=True)
 
     def generate_prompt(self):
