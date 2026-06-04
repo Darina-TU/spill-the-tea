@@ -1,21 +1,21 @@
-from services.jsonl_service import JsonlService
+from repositories.deck_repository import DeckRepository
 from configs import config
 
 user = "darina"
 deck = "deck2"
 interest1 = "hiking"
 interest2 = "boxing"
-question = "Never have I hit someone."
+question = "Never have I stolen from mom."
 
-jsonl_service = JsonlService(user, deck)
+jsonl_service = DeckRepository(user, deck)
 
 # ===== WRITE =====
 # jsonl_service.append_game_config(config.GameMode.MIXED) # once
 # jsonl_service.append_preferences([interest1, interest2]) # once
-#
-# question_id = jsonl_service.append_question(question)
-# jsonl_service.append_rating(question_id, 3)
-# print("Saved test data.")
+
+question_id = jsonl_service.append_question(question)
+jsonl_service.append_rating(question_id, 1)
+print("Saved test data.")
 
 # ===== READ =====
 game_config = jsonl_service.read_latest_game_config()
