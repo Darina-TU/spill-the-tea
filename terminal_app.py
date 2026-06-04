@@ -2,6 +2,7 @@ import os
 import json
 from openai import OpenAI
 from dotenv import load_dotenv
+from pathlib import Path
 
 from configs import config
 from repositories.deck_repository import DeckRepository
@@ -107,6 +108,51 @@ def play_unrated_questions(deck_repository):
             except ValueError:
                 print("Please enter a number from 1 to 5.")
 
+def choose_username():
+    return input("Username: ").strip()
+
+
+def get_existing_decks(username):
+    user_folder = Path("users") / username
+
+    if not user_folder.exists():
+        return []
+
+    return [
+        folder.name
+        for folder in user_folder.iterdir()
+        if folder.is_dir() and folder.name != "prompts"
+    ]
+
+
+def choose_or_create_deck(username):
+    existing_decks = get_existing_decks(username)
+
+    if not existing_decks:
+        print("\nNo existing decks found.")
+        return create_new_deck_name()
+
+    print("\nExisting decks:")
+    for index, deck in enumerate(existing_decks, start=1):
+        print(f"{index} - {deck}")
+
+    print("N - Create new deck")
+
+    choice = input("Choose deck or create new one: ").strip()
+
+    if choice.upper() == "N":
+        return create_new_deck_name()
+
+    try:
+        deck_index = int(choice) - 1
+        return existing_decks[deck_index]
+    except (ValueError, IndexError):
+        print("Invalid choice. Creating new deck.")
+        return create_new_deck_name()
+
+
+def create_new_deck_name():
+    return input("New deck name: ").strip()
 
 def main():
     load_dotenv()
@@ -115,17 +161,22 @@ def main():
         api_key=os.environ.get("OPENAI_API_KEY")
     )
 
-    username = input("Username: ").strip()
-    deck_name = input("Deck name: ").strip()
+    username = choose_username()
+    deck_name = choose_or_create_deck(username)
 
     deck_repository = DeckRepository(username, deck_name)
     prompt_service = PromptService(deck_repository)
 
-    game_mode = choose_game_mode()
-    interests = ask_interests()
+    is_new_deck = not deck_repository.read_latest_game_config()
 
-    deck_repository.append_game_config(game_mode)
-    deck_repository.append_preferences(interests)
+    if is_new_deck:
+        game_mode = choose_game_mode()
+        interests = ask_interests()
+
+        deck_repository.append_game_config(game_mode)
+        deck_repository.append_preferences(interests)
+    else:
+        print(f"\nContinuing existing deck: {deck_name}")
 
     while True:
         print("\nGenerating questions...")
@@ -133,15 +184,19 @@ def main():
 
         play_unrated_questions(deck_repository)
 
-        next_action = input("\nType NEXT for another round or QUIT to stop: ").strip().upper()
+        while True:
+            next_action = input(
+                "\nType NEXT for another round or QUIT to stop: "
+            ).strip().upper()
 
-        if next_action == "QUIT":
-            print("Game ended.")
-            break
+            if next_action == "NEXT":
+                break
 
-        if next_action != "NEXT":
-            print("Unknown input. Ending game.")
-            break
+            if next_action == "QUIT":
+                print("Game ended.")
+                return
+
+            print("Invalid input. Please enter NEXT or QUIT.")
 
 
 if __name__ == "__main__":

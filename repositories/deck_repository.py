@@ -116,7 +116,7 @@ class DeckRepository:
     # ===== PROMPTS =====
 
     def save_prompt_xml(self, prompt_xml):
-        prompts_folder = Path("users") / self.username / "prompts"
+        prompts_folder = self.deck_folder / "prompts"
         prompts_folder.mkdir(parents=True, exist_ok=True)
 
         prompt_id = self._get_next_prompt_id(prompts_folder)
