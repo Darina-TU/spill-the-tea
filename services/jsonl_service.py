@@ -14,6 +14,8 @@ class JsonlService:
         self.questions_file = self.deck_folder / "questions.jsonl"
         self.ratings_file = self.deck_folder / "ratings.jsonl"
 
+    # ===== WRITE =====
+
     def append_game_config(self, game_mode):
         entry = {
             "timestamp": datetime.now().isoformat(),
@@ -72,3 +74,39 @@ class JsonlService:
                     last_id = question["id"]
 
         return last_id + 1
+
+
+    # ===== READ =====
+
+    def read_game_config(self):
+        return self._read_jsonl(self.game_config_file)
+
+    def read_preferences(self):
+        return self._read_jsonl(self.preferences_file)
+
+    def read_questions(self):
+        return self._read_jsonl(self.questions_file)
+
+    def read_ratings(self):
+        return self._read_jsonl(self.ratings_file)
+
+    def read_latest_game_config(self):
+        entries = self.read_game_config()
+        return entries[-1] if entries else None
+
+    def read_latest_preferences(self):
+        entries = self.read_preferences()
+        return entries[-1] if entries else None
+
+    def _read_jsonl(self, file_path):
+        if not file_path.exists():
+            return []
+
+        entries = []
+
+        with open(file_path, "r", encoding="utf-8") as file:
+            for line in file:
+                if line.strip():
+                    entries.append(json.loads(line))
+
+        return entries
