@@ -6,6 +6,9 @@ from datetime import datetime
 class DeckRepository:
 
     def __init__(self, username, deck_name):
+        self.username = username
+        self.deck_name = deck_name
+
         self.deck_folder = Path("users") / username / deck_name
         self.deck_folder.mkdir(parents=True, exist_ok=True)
 
@@ -75,7 +78,6 @@ class DeckRepository:
 
         return last_id + 1
 
-
     # ===== READ =====
 
     def read_game_config(self):
@@ -110,3 +112,30 @@ class DeckRepository:
                     entries.append(json.loads(line))
 
         return entries
+
+    # ===== PROMPTS =====
+
+    def save_prompt_xml(self, prompt_xml):
+        prompts_folder = Path("users") / self.username / "prompts"
+        prompts_folder.mkdir(parents=True, exist_ok=True)
+
+        prompt_id = self._get_next_prompt_id(prompts_folder)
+        prompt_file = prompts_folder / f"prompt_{prompt_id}.xml"
+
+        with open(prompt_file, "w", encoding="utf-8") as file:
+            file.write(prompt_xml)
+
+        return prompt_file
+
+    def _get_next_prompt_id(self, prompts_folder):
+        existing_prompts = list(prompts_folder.glob("prompt_*.xml"))
+
+        if not existing_prompts:
+            return 1
+
+        ids = [
+            int(file.stem.replace("prompt_", ""))
+            for file in existing_prompts
+        ]
+
+        return max(ids) + 1
