@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 
 
-class JsonlService:
+class DeckRepository:
 
     def __init__(self, username, deck_name):
         self.deck_folder = Path("users") / username / deck_name
