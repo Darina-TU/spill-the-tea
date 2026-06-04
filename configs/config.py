@@ -19,7 +19,7 @@ MAX_INTERESTS = 10
 class GameMode(Enum):
     NEVER_HAVE_I_EVER = "Never Have I Ever"
     TRUTH_OR_DARE = "Truth or Dare"
-    MIXED = "Mixed"
+    MIXED = "Never Have I Ever and Truth or Dare"
 
 class QuestionType(Enum):
     TRUTH = "Truth"
