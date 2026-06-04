@@ -1,57 +1,42 @@
-users/darina/
-├── game_config.jsonl      # one entry when deck starts
-├── preferences.jsonl      # one entry when deck starts, or when interests change
-├── questions.jsonl        # grows every generated question
-└── ratings.jsonl          # grows every rating
+# Spill the Tea Prototype
 
-During initialization append once to:
-game_config.jsonl
-preferences.jsonl
+This is a local Python prototype of the party game **Spill the Tea**.  
+It was built for an evaluation test and runs as a terminal application.
 
-During gameplay only append to:
-questions.jsonl
-ratings.jsonl
+## Goal
 
+The app generates personalized party game questions based on:
 
+- selected game mode
+- user interests
+- previously generated questions
+- user ratings from 1 to 5
 
+The prototype stores all data locally using JSON Lines files.
 
-ui/
-├── app.py
-├── start_screen.py
-├── deck_screen.py
-├── setup_screen.py
-└── game_screen.py
+## Project Structure
 
-App
-- owns the main Tkinter window
-- switches between screens
-- stores selected username/deck
-
-StartScreen
-- asks for username
-- checks if user exists
-- moves to DeckScreen
-
-DeckScreen
-- shows existing decks
-- lets user choose existing deck
-- or create a new deck
-
-SetupScreen
-- only for new decks
-- asks game mode and interests
-- saves game_config + preferences
-
-GameScreen
-- generates questions
-- displays one unrated question at a time
-- lets user rate 1–5
-- shows NEXT / QUIT
-
-Button click: "Start Game"
-↓
-DeckRepository(username, deck_name)
-↓
-PromptService(deck_repository)
-↓
-GameScreen displays questions
+```text
+spill-the-tea/
+│
+├── terminal_app.py
+├── configs/
+│   └── config.py
+│
+├── repositories/
+│   ├── deck_repository.py
+│   └── prompts/
+│       └── base_prompt.xml
+│
+├── services/
+│   └── prompt_service.py
+│
+└── users/
+    └── username/
+        └── deck_name/
+            ├── game_config.jsonl
+            ├── preferences.jsonl
+            ├── questions.jsonl
+            ├── ratings.jsonl
+            └── prompts/
+                └── prompt_1.xml
