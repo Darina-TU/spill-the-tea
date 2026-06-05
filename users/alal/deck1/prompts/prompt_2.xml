@@ -1,0 +1,127 @@
+<prompt>
+
+    <role>
+        You are a card generator.
+    </role>
+
+    <task>
+        Use the provided interests and, if provided, rated questions to create 10 new questions in the format "Never Have I Ever and Truth or Dare".
+    </task>
+
+    <rules>
+        <rule>Questions must be different from the given questions.</rule>
+
+        <rule>
+            Consider the provided interests when generating questions.
+        </rule>
+
+        <rule>
+            Consider the ratings of previous questions.
+            Ratings are from 1 to 5:
+            1 = do not generate another question on this topic,
+            2 = generate significantly fewer questions on this topic,
+            3 = neutral,
+            4 = generate more questions on this topic,
+            5 = definitely generate more questions on this topic.
+        </rule>
+
+        <rule>
+            Generate more questions related to highly rated topics and fewer questions related to poorly rated topics.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            5 Truth questions and 5 Dare questions.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Never Have I Ever and Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            There must always be at least 3 Truths, at least 3 Dares and at least 3 Never Have I Ever questions.
+            The last question is from the most liked category so far.
+        </rule>
+
+        <rule>Leave the rating empty in the output.</rule>
+    </rules>
+
+    <input>
+        {
+        "interests": [
+                "sunny",
+                "rain",
+                "cube",
+                "code",
+                "wellness",
+                "cave",
+                "running"
+        ],
+        "rated_questions": [
+                {
+                        "id": 1,
+                        "text": "Never Have I Ever gone for a run just to enjoy a sunny day.",
+                        "rating": 4
+                },
+                {
+                        "id": 2,
+                        "text": "Truth: What is the most relaxing wellness routine you actually keep up with?",
+                        "rating": 5
+                },
+                {
+                        "id": 3,
+                        "text": "Dare: Do 10 jumping jacks and then share whether you feel more like a runner or a cube stuck in place.",
+                        "rating": 1
+                },
+                {
+                        "id": 4,
+                        "text": "Never Have I Ever worked on a code problem for so long that I forgot what time it was.",
+                        "rating": 5
+                },
+                {
+                        "id": 5,
+                        "text": "Truth: Have you ever found rain strangely comforting, and why?",
+                        "rating": 5
+                },
+                {
+                        "id": 6,
+                        "text": "Dare: Pretend you are exploring a cave and describe what you discover in the most dramatic way possible.",
+                        "rating": 3
+                },
+                {
+                        "id": 7,
+                        "text": "Never Have I Ever tried to solve a cube puzzle and given up halfway through.",
+                        "rating": 5
+                },
+                {
+                        "id": 8,
+                        "text": "Truth: What is a wellness habit you wish you were better at keeping?",
+                        "rating": 5
+                },
+                {
+                        "id": 9,
+                        "text": "Dare: Race in place for 20 seconds like you're sprinting through a sunny trail.",
+                        "rating": 1
+                },
+                {
+                        "id": 10,
+                        "text": "Dare: Create a quick code-like message using only hand gestures and make the group guess it.",
+                        "rating": 1
+                }
+        ]
+}
+    </input>
+
+    <output_format>
+        {
+            "deck": "deck1",
+            "rated_questions": [
+                {
+                    "id": "...",
+                    "text": "...",
+                    "rating": null
+                }
+            ]
+        }
+    </output_format>
+
+</prompt>

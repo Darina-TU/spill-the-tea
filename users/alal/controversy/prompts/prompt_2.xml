@@ -1,0 +1,130 @@
+<prompt>
+
+    <role>
+        You are a card generator.
+    </role>
+
+    <task>
+        Use the provided interests and, if provided, rated questions to create 10 new questions in the format "Truth or Dare".
+    </task>
+
+    <rules>
+        <rule>Questions must be different from the given questions.</rule>
+
+        <rule>
+            Consider the provided interests when generating questions.
+        </rule>
+
+        <rule>
+            Consider the ratings of previous questions.
+            Ratings are from 1 to 5:
+            1 = do not generate another question on this topic,
+            2 = generate significantly fewer questions on this topic,
+            3 = neutral,
+            4 = generate more questions on this topic,
+            5 = definitely generate more questions on this topic.
+        </rule>
+
+        <rule>
+            Generate more questions related to highly rated topics and fewer questions related to poorly rated topics.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            5 Truth questions and 5 Dare questions.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Never Have I Ever and Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            There must always be at least 3 Truths, at least 3 Dares and at least 3 Never Have I Ever questions.
+            The last question is from the most liked category so far.
+        </rule>
+
+        <rule>Leave the rating empty in the output.</rule>
+    </rules>
+
+    <input>
+        {
+        "interests": [
+                "trump",
+                "racism",
+                "israel",
+                "palestine",
+                "vietnqam",
+                "putin",
+                "charlie kirk",
+                "serial killer",
+                "femizide",
+                "onlyfans"
+        ],
+        "rated_questions": [
+                {
+                        "id": 1,
+                        "text": "Truth: What is a political opinion you used to hold strongly that you’ve changed your mind about?",
+                        "rating": 5
+                },
+                {
+                        "id": 2,
+                        "text": "Truth: Which global conflict topic do you find yourself most curious to learn more about, and why?",
+                        "rating": 4
+                },
+                {
+                        "id": 3,
+                        "text": "Truth: Have you ever judged someone too quickly based on a stereotype? What happened?",
+                        "rating": 4
+                },
+                {
+                        "id": 4,
+                        "text": "Truth: Which public figure or commentator do you disagree with the most, and what is your main reason?",
+                        "rating": 5
+                },
+                {
+                        "id": 5,
+                        "text": "Truth: What topic in the news do you feel is discussed too little, and why?",
+                        "rating": 5
+                },
+                {
+                        "id": 6,
+                        "text": "Dare: Speak for 30 seconds in a dramatic news-anchor voice about the most boring thing in the room.",
+                        "rating": 3
+                },
+                {
+                        "id": 7,
+                        "text": "Dare: Write a fake scandal headline about yourself and read it out loud seriously.",
+                        "rating": 3
+                },
+                {
+                        "id": 8,
+                        "text": "Dare: Try to convince the group you should be allowed to start a podcast about one absurd topic.",
+                        "rating": 5
+                },
+                {
+                        "id": 9,
+                        "text": "Dare: Make a 10-second commercial for an imaginary product and give it a catchy slogan.",
+                        "rating": 2
+                },
+                {
+                        "id": 10,
+                        "text": "Dare: Do your best impression of a heated debate show host explaining a completely harmless subject.",
+                        "rating": 2
+                }
+        ]
+}
+    </input>
+
+    <output_format>
+        {
+            "deck": "deck1",
+            "rated_questions": [
+                {
+                    "id": "...",
+                    "text": "...",
+                    "rating": null
+                }
+            ]
+        }
+    </output_format>
+
+</prompt>

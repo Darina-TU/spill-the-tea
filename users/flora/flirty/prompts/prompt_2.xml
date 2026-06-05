@@ -1,0 +1,125 @@
+<prompt>
+
+    <role>
+        You are a card generator.
+    </role>
+
+    <task>
+        Use the provided interests and, if provided, rated questions to create 10 new questions in the format "Never Have I Ever".
+    </task>
+
+    <rules>
+        <rule>Questions must be different from the given questions.</rule>
+
+        <rule>
+            Consider the provided interests when generating questions.
+        </rule>
+
+        <rule>
+            Consider the ratings of previous questions.
+            Ratings are from 1 to 5:
+            1 = do not generate another question on this topic,
+            2 = generate significantly fewer questions on this topic,
+            3 = neutral,
+            4 = generate more questions on this topic,
+            5 = definitely generate more questions on this topic.
+        </rule>
+
+        <rule>
+            Generate more questions related to highly rated topics and fewer questions related to poorly rated topics.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            5 Truth questions and 5 Dare questions.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Never Have I Ever and Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            There must always be at least 3 Truths, at least 3 Dares and at least 3 Never Have I Ever questions.
+            The last question is from the most liked category so far.
+        </rule>
+
+        <rule>Leave the rating empty in the output.</rule>
+    </rules>
+
+    <input>
+        {
+        "interests": [
+                "gay",
+                "adventure",
+                "sexz",
+                "food",
+                "friends"
+        ],
+        "rated_questions": [
+                {
+                        "id": 1,
+                        "text": "Never Have I Ever gone on an unexpected adventure with friends.",
+                        "rating": 2
+                },
+                {
+                        "id": 2,
+                        "text": "Never Have I Ever fallen for someone of the same gender.",
+                        "rating": 5
+                },
+                {
+                        "id": 3,
+                        "text": "Never Have I Ever tried a food I was nervous to order.",
+                        "rating": 3
+                },
+                {
+                        "id": 4,
+                        "text": "Never Have I Ever packed a bag and left for a spontaneous trip.",
+                        "rating": 2
+                },
+                {
+                        "id": 5,
+                        "text": "Never Have I Ever had a crush on a friend.",
+                        "rating": 5
+                },
+                {
+                        "id": 6,
+                        "text": "Never Have I Ever shared a secret with a close friend late at night.",
+                        "rating": 3
+                },
+                {
+                        "id": 7,
+                        "text": "Never Have I Ever tried a very spicy dish just to prove I could handle it.",
+                        "rating": 2
+                },
+                {
+                        "id": 8,
+                        "text": "Never Have I Ever gone on a spontaneous date.",
+                        "rating": 5
+                },
+                {
+                        "id": 9,
+                        "text": "Never Have I Ever kissed someone I had been flirting with.",
+                        "rating": 5
+                },
+                {
+                        "id": 10,
+                        "text": "Never Have I Ever planned an entire day around hanging out with friends.",
+                        "rating": 2
+                }
+        ]
+}
+    </input>
+
+    <output_format>
+        {
+            "deck": "deck1",
+            "rated_questions": [
+                {
+                    "id": "...",
+                    "text": "...",
+                    "rating": null
+                }
+            ]
+        }
+    </output_format>
+
+</prompt>

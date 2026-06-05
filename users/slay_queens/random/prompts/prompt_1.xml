@@ -1,0 +1,70 @@
+<prompt>
+
+    <role>
+        You are a card generator.
+    </role>
+
+    <task>
+        Use the provided interests and, if provided, rated questions to create 10 new questions in the format "Never Have I Ever and Truth or Dare".
+    </task>
+
+    <rules>
+        <rule>Questions must be different from the given questions.</rule>
+
+        <rule>
+            Consider the provided interests when generating questions.
+        </rule>
+
+        <rule>
+            Consider the ratings of previous questions.
+            Ratings are from 1 to 5:
+            1 = do not generate another question on this topic,
+            2 = generate significantly fewer questions on this topic,
+            3 = neutral,
+            4 = generate more questions on this topic,
+            5 = definitely generate more questions on this topic.
+        </rule>
+
+        <rule>
+            Generate more questions related to highly rated topics and fewer questions related to poorly rated topics.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            5 Truth questions and 5 Dare questions.
+        </rule>
+
+         <rule>
+            If the GAME_MODE is "Never Have I Ever and Truth or Dare" then this rule applies.
+            The output must contain exactly 10 questions:
+            There must always be at least 3 Truths, at least 3 Dares and at least 3 Never Have I Ever questions.
+            The last question is from the most liked category so far.
+        </rule>
+
+        <rule>Leave the rating empty in the output.</rule>
+    </rules>
+
+    <input>
+        {
+        "interests": [
+                "auvbiohbhawef"
+        ],
+        "rated_questions": []
+}
+    </input>
+
+    <output_format>
+        {
+            "deck": "deck1",
+            "rated_questions": [
+                {
+                    "id": "...",
+                    "text": "...",
+                    "rating": null
+                }
+            ]
+        }
+    </output_format>
+
+</prompt>
