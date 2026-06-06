@@ -4,9 +4,12 @@ This is a local Python prototype of the party game **Spill the Tea**.
 It was built for an evaluation test and runs as a terminal application.
 
 ## How to start
+Download the source code in your code editor of choice.
+Add a .env file in the root directory with this line:
+OPENAI_API_KEY=insert_your_chatgpt_api_key_here
+
 Run the python script **terminal_app.py**.
 Follow the instructions and start playing. 
-
 
 ## Goal 
 
