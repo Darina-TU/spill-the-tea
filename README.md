@@ -3,7 +3,12 @@
 This is a local Python prototype of the party game **Spill the Tea**.  
 It was built for an evaluation test and runs as a terminal application.
 
-## Goal
+## How to start
+Run the python script **terminal_app.py**.
+Follow the instructions and start playing. 
+
+
+## Goal 
 
 The app generates personalized party game questions based on:
 
