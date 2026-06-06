@@ -11,10 +11,8 @@ OPENAI_API_KEY=insert_your_chatgpt_api_key_here
 Run the python script **terminal_app.py**.
 Follow the instructions and start playing. 
 
-## Goal 
-
+## Goal
 The app generates personalized party game questions based on:
-
 - selected game mode
 - user interests
 - previously generated questions
@@ -22,11 +20,15 @@ The app generates personalized party game questions based on:
 
 The prototype stores all data locally using JSON Lines files.
 
+## University Evaluation
+For our university project the prompts generated throughout the content experiment can be found under /users.
+The participants have consented for their prompts to be made public on this GitHub repository.
+
 ## Project Structure
 
 ```text
 spill-the-tea/
-│
+│── .env
 ├── terminal_app.py
 ├── configs/
 │   └── config.py
